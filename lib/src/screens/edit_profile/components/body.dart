@@ -300,6 +300,19 @@ class _BodyState extends State<Body> {
                 child: Text('Save Changes', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
             ),
           ),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
+          Container(
+            height: getProportionateScreenHeight(40),
+            decoration: BoxDecoration(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: const Center(
+                child: Text('Log out', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
+            ),
+          ),
         ],
       ),
     );

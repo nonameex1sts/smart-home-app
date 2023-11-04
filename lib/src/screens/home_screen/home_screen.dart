@@ -7,6 +7,7 @@ import 'package:domus/view/home_screen_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../set_event_screen/set_event_screen.dart';
 import 'components/body.dart';
 import 'package:domus/src/screens/menu_page/menu_screen.dart';
 
@@ -36,19 +37,12 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Hi, Lex',
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                      SizedBox(
-                        width: getProportionateScreenWidth(60),
-                      ),
                       Container(
-                        width: 50,
-                        height: 50,
-                        decoration: const BoxDecoration(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
                           color: Color(0xffdadada),
                           borderRadius:
                               BorderRadius.all(Radius.elliptical(45, 45)),
@@ -67,8 +61,9 @@ class HomeScreen extends StatelessWidget {
 
                         ),
                       ),
-                      SizedBox(
-                        width: getProportionateScreenWidth(5),
+                      Text(
+                        'Dat\'s home',
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                       Container(
                         width: 50,
@@ -82,74 +77,25 @@ class HomeScreen extends StatelessWidget {
                         child: IconButton(
                           splashRadius: 25,
                           icon: const Icon(
-                            CupertinoIcons.heart_fill,
+                            CupertinoIcons.calendar,
                             color: Colors.grey,
                             size: 30,
                           ),
                           onPressed: () {
                             // Navigator.of(context).pushNamed(EditProfile.routeName);
-                            Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                                Favourites(
-                                  model:model,
-                                ),));
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                            //     Favourites(
+                            //       model:model,
+                            //     ),));
+                            Navigator.of(context).pushNamed(SetEventScreen.routeName);
                           },
                         ),
                       ),
                     ],
                   ),
                 ),
-                bottom: PreferredSize(
-                  child: TabBar(
-                      isScrollable: true,
-                      unselectedLabelColor: Colors.white.withOpacity(0.3),
-                      indicatorColor: const Color(0xFF464646),
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            'Living Room',
-                            style: Theme.of(context).textTheme.headline3,
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'Dining',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            'Kitchen',
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        ),
-                      ]),
-                  preferredSize: Size.fromHeight(
-                    getProportionateScreenHeight(
-                      35,
-                    ),
-                  ),
-                ),
               ),
-              drawer: SizedBox(
-                 width: getProportionateScreenWidth(270),
-                  child: const Menu()),
-              body: TabBarView(
-                children: <Widget>[
-                  Body(
-                    model: model,
-                  ),
-                  Center(
-                    child: Text(
-                      'To be Built Soon',
-                      style: Theme.of(context).textTheme.headline3,
-                    ),
-                  ),
-                  const Center(
-                    child: Text('under construction'),
-                  ),
-                ],
-              ),
-              bottomNavigationBar: CustomBottomNavBar(model: model),
+              body: Body(model: model),
             ),
           );
         });

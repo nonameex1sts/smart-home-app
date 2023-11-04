@@ -1,6 +1,5 @@
 import 'package:domus/config/size_config.dart';
 import 'package:domus/src/screens/home_screen/components/music_widget.dart';
-import 'package:domus/src/screens/home_screen/components/savings_container.dart';
 import 'package:domus/src/screens/home_screen/components/weather_container.dart';
 import 'package:domus/src/screens/set_event_screen/set_event_screen.dart';
 import 'package:domus/src/screens/smart_ac/smart_ac.dart';
@@ -35,10 +34,10 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.all(getProportionateScreenHeight(5)),
               child: WeatherContainer(model: model),
             ),
-            Padding(
-              padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-              child: SavingsContainer(model: model),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+            //   child: const MusicWidget(),
+            // ),
             Row(
               children: [
                 Expanded(
@@ -76,10 +75,6 @@ class Body extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-            Padding(
-              padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-              child: const MusicWidget(),
             ),
             Row(
               children: [
@@ -123,28 +118,28 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.all(getProportionateScreenHeight(8)),
               child: const AddNewDevice(),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(SetEventScreen.routeName);
-              },
-              child: const Text(
-                'To SetEventScreen',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(SmartTV.routeName);
-              },
-              child: const Text(
-                'Smart TV Screen',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.of(context).pushNamed(SetEventScreen.routeName);
+            //   },
+            //   child: const Text(
+            //     'To SetEventScreen',
+            //     style: TextStyle(
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     Navigator.of(context).pushNamed(SmartTV.routeName);
+            //   },
+            //   child: const Text(
+            //     'Smart TV Screen',
+            //     style: TextStyle(
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

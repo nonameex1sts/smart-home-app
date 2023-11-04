@@ -6,7 +6,6 @@ import 'package:domus/src/screens/smart_ac/smart_ac.dart';
 import 'package:domus/src/screens/smart_light/smart_light.dart';
 import 'package:domus/src/screens/smart_speaker/smart_speaker.dart';
 import 'package:domus/src/screens/smart_fan/smart_fan.dart';
-import 'package:domus/src/screens/splash_screen/splash_screen.dart';
 import 'package:domus/src/screens/stats_screen/stats_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:domus/src/screens/home_screen/home_screen.dart';
@@ -28,7 +27,6 @@ final Map<String, WidgetBuilder> routes = {
   SmartTV.routeName: (context) => const SmartTV(),
   SmartLight.routeName: (context) => const SmartLight(),
   SmartSpeaker.routeName: (context) => const SmartSpeaker(),
-  SplashScreen.routeName: (context) => const SplashScreen(),
   StatsScreen.routeName: (context) => const StatsScreen(),
   MyListScreen.routeName: (context) => const MyListScreen()
 };
