@@ -12,7 +12,7 @@ class WeatherContainer extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: getProportionateScreenHeight(100),
+          height: getProportionateScreenHeight(80),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             color: const Color(0xFFFFFFFF),
@@ -23,46 +23,83 @@ class WeatherContainer extends StatelessWidget {
               vertical: getProportionateScreenHeight(6),
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(
-                  width: getProportionateScreenWidth(90),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                // SizedBox(
+                //   width: getProportionateScreenWidth(90),
+                // ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      '28°C',
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    Text(
-                      'Cloudy',
-                      style: Theme.of(context).textTheme.headline1,
+                    const Icon(
+                      Icons.thermostat,
+                      color: Colors.black,
+                      size: 60,
                     ),
                     SizedBox(
-                      height: getProportionateScreenHeight(5),
+                      width: getProportionateScreenWidth(10),
                     ),
                     Text(
-                      '27 Mar 2022',
-                      style: Theme.of(context).textTheme.headline5,
+                      '28°C',
+                      style: Theme.of(context).textTheme.headlineLarge,
                     ),
-                    Text(
-                      'Jagakarsa,Jakarta',
-                      style: Theme.of(context).textTheme.headline5,
-                    )
                   ],
                 ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Icon(
+                      Icons.water_drop_rounded,
+                      color: Colors.black,
+                      size: 60,
+                    ),
+                    SizedBox(
+                      width: getProportionateScreenWidth(10),
+                    ),
+                    Text(
+                      '70%',
+                      style: Theme.of(context).textTheme.headlineLarge,
+
+                    ),
+                  ],
+                ),
+                // Column(
+                //   crossAxisAlignment: CrossAxisAlignment.end,
+                //   children: [
+                //     Text(
+                //       '28°C',
+                //       style: Theme.of(context).textTheme.headline1,
+                //     ),
+                //     Text(
+                //       'Cloudy',
+                //       style: Theme.of(context).textTheme.headline1,
+                //     ),
+                //     SizedBox(
+                //       height: getProportionateScreenHeight(5),
+                //     ),
+                //     Text(
+                //       '27 Mar 2022',
+                //       style: Theme.of(context).textTheme.headline5,
+                //     ),
+                //     Text(
+                //       'Ha Noi, Viet Nam',
+                //       style: Theme.of(context).textTheme.headline5,
+                //     )
+                //   ],
+                // ),
               ],
             ),
           ),
         ),
-        Image.asset(
-          'assets/images/weather/0.png',
-          height: getProportionateScreenHeight(110),
-          width: getProportionateScreenWidth(140),
-          fit: BoxFit.contain,
-        ),
+        // Image.asset(
+        //   'assets/images/weather/0.png',
+        //   height: getProportionateScreenHeight(110),
+        //   width: getProportionateScreenWidth(140),
+        //   fit: BoxFit.contain,
+        // ),
       ],
     );
   }

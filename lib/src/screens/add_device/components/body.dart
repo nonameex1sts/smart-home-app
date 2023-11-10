@@ -1,7 +1,5 @@
 import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/edit_profile/components/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:dotted_border/dotted_border.dart';
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -37,7 +35,7 @@ class _BodyState extends State<Body> {
             child: Row(
               children: [
                 const Text(
-                  'Edit Profile',
+                  'Add Device',
                   // style: Theme.of(context).textTheme.headline1,
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
@@ -55,51 +53,7 @@ class _BodyState extends State<Body> {
             ),
           ),
           SizedBox(
-            height: getProportionateScreenHeight(25),
-          ),
-          Center(
-            child: Container(
-              width: 350,
-              decoration: BoxDecoration(
-                color: const Color(0xFFBDBDBD).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              padding: EdgeInsets.only(
-                left: getProportionateScreenWidth(15),
-                top: getProportionateScreenHeight(15),
-                right: getProportionateScreenWidth(15),
-                bottom: getProportionateScreenHeight(40),
-              ),
-              child: Column(
-                children: [
-                  const Text(
-                    'Upload image',
-                    // style: Theme.of(context).textTheme.headline1,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: getProportionateScreenHeight(15),
-                  ),
-                  DottedBorder(
-                    borderType: BorderType.RRect,
-                    radius: const Radius.circular(20),
-                    dashPattern: const [7, 7],
-                    color: Colors.black38,
-                    strokeWidth: 2,
-                    // padding: EdgeInsets.fromLTRB(115, 37, 115, 37),
-                    padding: EdgeInsets.fromLTRB(
-                        getProportionateScreenWidth(75),
-                        getProportionateScreenHeight(25),
-                        getProportionateScreenWidth(75),
-                        getProportionateScreenHeight(25)),
-                    child: const UploadImage(),
-                  )
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
+            height: getProportionateScreenHeight(50),
           ),
           Form(
             key: _formKey,
@@ -118,7 +72,7 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your full name',
+                    hintText: 'Attribute 1',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
@@ -128,7 +82,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.edit,
                         color: Colors.white,
                       ),
                     ),
@@ -165,7 +119,7 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Username',
+                    hintText: 'Attribute 2',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
@@ -175,7 +129,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.edit,
                         color: Colors.white,
                       ),
                     ),
@@ -210,7 +164,7 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your Email',
+                    hintText: 'Attribute 3',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
@@ -220,7 +174,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.edit,
                         color: Colors.white,
                       ),
                     ),
@@ -255,7 +209,7 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your Phone',
+                    hintText: 'Attribute 4',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
@@ -265,7 +219,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.edit,
                         color: Colors.white,
                       ),
                     ),
@@ -299,23 +253,7 @@ class _BodyState extends State<Body> {
             child: InkWell(
               onTap: () {},
               child: const Center(
-                  child: Text('Save Changes', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
-              ),
-            ),
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          Container(
-            height: getProportionateScreenHeight(40),
-            decoration: BoxDecoration(
-              color: Colors.black87,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: InkWell(
-              onTap: () {},
-              child: const Center(
-                  child: Text('Log out', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
+                  child: Text('Add device', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),
             ),
           ),

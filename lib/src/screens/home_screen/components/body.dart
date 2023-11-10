@@ -1,13 +1,6 @@
 import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/home_screen/components/music_widget.dart';
 import 'package:domus/src/screens/home_screen/components/weather_container.dart';
-import 'package:domus/src/screens/set_event_screen/set_event_screen.dart';
-import 'package:domus/src/screens/smart_ac/smart_ac.dart';
-import 'package:domus/src/screens/smart_fan/smart_fan.dart';
-import 'package:domus/src/screens/smart_light/smart_light.dart';
-import 'package:domus/src/screens/smart_speaker/smart_speaker.dart';
 import 'package:domus/view/home_screen_view_model.dart';
-import 'package:domus/src/screens/smart_tv/smart_tv.dart';
 import 'package:flutter/material.dart';
 
 import 'add_device_widget.dart';
@@ -47,7 +40,7 @@ class Body extends StatelessWidget {
                       itsOn: model.isLightOn,
                       switchButton: model.lightSwitch,
                       onTap: () {
-                        Navigator.of(context).pushNamed(SmartLight.routeName);
+                        // Navigator.of(context).pushNamed(SmartLight.routeName);
                       },
                       iconAsset: 'assets/icons/svg/light.svg',
                       device: 'Lightening',
@@ -64,7 +57,7 @@ class Body extends StatelessWidget {
                       itsOn: model.isACON,
                       switchButton: model.acSwitch,
                       onTap: () {
-                        Navigator.of(context).pushNamed(SmartAC.routeName);
+                        // Navigator.of(context).pushNamed(SmartAC.routeName);
                       },
                       iconAsset: 'assets/icons/svg/ac.svg',
                       device: 'AC',
@@ -85,7 +78,7 @@ class Body extends StatelessWidget {
                       itsOn: model.isSpeakerON,
                       switchButton: model.speakerSwitch,
                       onTap: () {
-                        Navigator.of(context).pushNamed(SmartSpeaker.routeName);
+                        // Navigator.of(context).pushNamed(SmartSpeaker.routeName);
                       },
                       iconAsset: 'assets/icons/svg/speaker.svg',
                       device: 'Speaker',
@@ -102,7 +95,7 @@ class Body extends StatelessWidget {
                       itsOn: model.isFanON,
                       switchButton: model.fanSwitch,
                       onTap: () {
-                        Navigator.of(context).pushNamed(SmartFan.routeName);
+                        // Navigator.of(context).pushNamed(SmartFan.routeName);
                       },
                       iconAsset: 'assets/icons/svg/fan.svg',
                       device: 'Fan',

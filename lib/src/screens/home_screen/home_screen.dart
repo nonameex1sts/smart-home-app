@@ -1,15 +1,12 @@
 import 'package:domus/config/size_config.dart';
 import 'package:domus/provider/base_view.dart';
 import 'package:domus/src/screens/edit_profile/edit_profile.dart';
-import 'package:domus/src/screens/favourites_screen/favourites_screen.dart';
-import 'package:domus/src/widgets/custom_bottom_nav_bar.dart';
 import 'package:domus/view/home_screen_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../set_event_screen/set_event_screen.dart';
 import 'components/body.dart';
-import 'package:domus/src/screens/menu_page/menu_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routeName = '/home-screen';
