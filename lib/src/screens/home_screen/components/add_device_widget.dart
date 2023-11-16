@@ -10,7 +10,8 @@ class AddNewDevice extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(AddDevice.routeName);
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+            AddDevice()));
       },
       child: DottedBorder(
         borderType: BorderType.RRect,

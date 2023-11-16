@@ -4,7 +4,6 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:domus/src/screens/set_event_screen/components.dart';
 
 class SetEventScreen extends StatefulWidget {
-  static String routeName = '/set-event-screen';
   const SetEventScreen({Key? key}) : super(key: key);
 
   @override

@@ -20,12 +20,10 @@ class _BodyState extends State<Body> {
     return Padding(
       padding: EdgeInsets.only(
         left: getProportionateScreenWidth(20),
-        // top: getProportionateScreenHeight(15),
         right: getProportionateScreenWidth(20),
         bottom: getProportionateScreenHeight(15),
       ),
       child: ListView(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             height: getProportionateScreenHeight(40),
@@ -36,7 +34,6 @@ class _BodyState extends State<Body> {
               children: [
                 const Text(
                   'Edit Device',
-                  // style: Theme.of(context).textTheme.headline1,
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
@@ -86,8 +83,6 @@ class _BodyState extends State<Body> {
                         color: Colors.white,
                       ),
                     ),
-                    // prefixIcon: Icon(Icons.person, size: 25, color: Colors.grey,),
-                    // contentPadding: EdgeInsets.only(left: 30),
                     border: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.black38),
                     ),

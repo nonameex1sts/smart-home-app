@@ -2,7 +2,6 @@ import 'package:domus/src/screens/edit_device/components/body.dart';
 import 'package:flutter/material.dart';
 
 class EditDevice extends StatelessWidget {
-  static String routeName = '/edit-device';
   const EditDevice({Key? key}) : super(key: key);
 
   @override

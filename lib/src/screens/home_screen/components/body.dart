@@ -1,14 +1,26 @@
 import 'package:domus/config/size_config.dart';
 import 'package:domus/src/screens/home_screen/components/weather_container.dart';
-import 'package:domus/view/home_screen_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'add_device_widget.dart';
 import 'dark_container.dart';
 
 class Body extends StatelessWidget {
-  final HomeScreenViewModel model;
-  const Body({Key? key, required this.model}) : super(key: key);
+  dynamic devices;
+  Body({Key? key, required this.devices}) : super(key: key);
+
+  String getIconAsset(String type) {
+    switch (type) {
+      case 'AC':
+        return 'assets/icons/svg/ac.svg';
+      case 'Fan':
+        return 'assets/icons/svg/fan.svg';
+      case 'Speaker':
+        return 'assets/icons/svg/speaker.svg';
+      default:
+        return 'assets/icons/svg/light.svg';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,114 +37,42 @@ class Body extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-              child: WeatherContainer(model: model),
+              child: WeatherContainer(),
             ),
-            // Padding(
-            //   padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-            //   child: const MusicWidget(),
-            // ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-                    child: DarkContainer(
-                      itsOn: model.isLightOn,
-                      switchButton: model.lightSwitch,
-                      onTap: () {
-                        // Navigator.of(context).pushNamed(SmartLight.routeName);
-                      },
-                      iconAsset: 'assets/icons/svg/light.svg',
-                      device: 'Lightening',
-                      deviceCount: '4 lamps',
-                      switchFav: model.lightFav,
-                      isFav: model.isLightFav,
+            for (int i = 0; i < devices.length; i+=2)
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                      child: DarkContainer(
+                        isOn: devices[i]['isOn'],
+                        iconAsset: getIconAsset(devices[i]['type']),
+                        type: devices[i]['type'],
+                        description: devices[i]['description'],
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-                    child: DarkContainer(
-                      itsOn: model.isACON,
-                      switchButton: model.acSwitch,
-                      onTap: () {
-                        // Navigator.of(context).pushNamed(SmartAC.routeName);
-                      },
-                      iconAsset: 'assets/icons/svg/ac.svg',
-                      device: 'AC',
-                      deviceCount: '4 devices',
-                      switchFav: model.acFav,
-                      isFav: model.isACFav,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-                    child: DarkContainer(
-                      itsOn: model.isSpeakerON,
-                      switchButton: model.speakerSwitch,
-                      onTap: () {
-                        // Navigator.of(context).pushNamed(SmartSpeaker.routeName);
-                      },
-                      iconAsset: 'assets/icons/svg/speaker.svg',
-                      device: 'Speaker',
-                      deviceCount: '1 device',
-                      switchFav: model.speakerFav,
-                      isFav: model.isSpeakerFav,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-                    child: DarkContainer(
-                      itsOn: model.isFanON,
-                      switchButton: model.fanSwitch,
-                      onTap: () {
-                        // Navigator.of(context).pushNamed(SmartFan.routeName);
-                      },
-                      iconAsset: 'assets/icons/svg/fan.svg',
-                      device: 'Fan',
-                      deviceCount: '2 devices',
-                      switchFav: model.fanFav,
-                      isFav: model.isFanFav,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                  if (i + 1 < devices.length)
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(getProportionateScreenHeight(5)),
+                        child: DarkContainer(
+                          isOn: devices[i + 1]['isOn'],
+                          iconAsset: getIconAsset(devices[i + 1]['type']),
+                          type: devices[i + 1]['type'],
+                          description: devices[i]['description'],
+                        ),
+                      ),
+                    )
+                  else
+                    Expanded(child: Container()),
+                ],
+              ),
             Padding(
               padding: EdgeInsets.all(getProportionateScreenHeight(8)),
               child: const AddNewDevice(),
             ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.of(context).pushNamed(SetEventScreen.routeName);
-            //   },
-            //   child: const Text(
-            //     'To SetEventScreen',
-            //     style: TextStyle(
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.of(context).pushNamed(SmartTV.routeName);
-            //   },
-            //   child: const Text(
-            //     'Smart TV Screen',
-            //     style: TextStyle(
-            //       color: Colors.black,
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

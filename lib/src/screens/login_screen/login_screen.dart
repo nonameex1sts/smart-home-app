@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:domus/config/size_config.dart';
 
 class LoginScreen  extends StatelessWidget {
-	static String routeName = '/login-screen';
 	const LoginScreen({Key? key}) : super(key: key);
 
 	@override

@@ -13,27 +13,6 @@ class Body extends StatelessWidget {
 	        crossAxisAlignment: CrossAxisAlignment.center,
       children: [
 				SizedBox(height: getProportionateScreenHeight(100)),
-        // Stack(
-	      //   children: [
-	      //   	Image.asset('assets/images/login.png',
-				//         height: getProportionateScreenHeight(300),
-	      //   	width: double.infinity,
-	      //   	fit: BoxFit.fill,),
-				//
-		    //     Positioned(
-			  //       bottom: getProportionateScreenHeight(20),
-			  //       left: getProportionateScreenWidth(20),
-			  //       child: Column(
-				//
-				//         crossAxisAlignment: CrossAxisAlignment.start,
-				//
-				//       children: [
-				//       	Text('SMART',style: Theme.of(context).textTheme.headline2!.copyWith(color: Colors.black, fontSize: 33),),
-				// 	      Text('HOME', style:  Theme.of(context).textTheme.headline1!.copyWith(color: Colors.black, fontSize: 64),)
-				//       ],
-		    //     )),
-	      //   ],
-        // ),
 				Column(
 				crossAxisAlignment: CrossAxisAlignment.center,
 				children: [
@@ -96,10 +75,6 @@ class Body extends StatelessWidget {
 				),
 				],
 				),
-	          // const Padding(
-	          //   padding: EdgeInsets.all(20.0),
-	          //   child: Text('sign into \nmange your device & accessory',style: TextStyle(fontSize: 18),),
-	          // ),
 				SizedBox(height: getProportionateScreenHeight(20)),
 	          Padding(
 		          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
@@ -112,12 +87,10 @@ class Body extends StatelessWidget {
 				          suffixIcon: const Icon(Icons.email, color: Colors.black,)
 			          ),),
 	          ),
-
 				SizedBox(height: getProportionateScreenHeight(20)),
 				Padding(
 					padding: const EdgeInsets.only(left: 20.0, right: 20.0),
 					child: TextField(
-
 						decoration: InputDecoration(
 							contentPadding: const EdgeInsets.only(left: 40.0, right: 20.0),
 							border: OutlineInputBorder(borderRadius: BorderRadius.circular(70.0),),
@@ -130,8 +103,19 @@ class Body extends StatelessWidget {
 					padding: const EdgeInsets.only(left: 20.0, right: 20),
 					child: InkWell(
 						onTap: (){
-							Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+							dynamic devices = [
+								{'type': 'Light',
+								'isOn': false,
+								'description': '4 lamps'},
+								{'type': 'Fan',
+								'isOn': false,
+								'description': 'living room'},
+								{'type': 'Light',
+									'isOn': true,
+									'description': 'hallway'}
+							];
 
+							Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(name: '', devices: devices)));
 						},
 						child: Container(
 					width: double.infinity,
