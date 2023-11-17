@@ -82,6 +82,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-///---------------Build Release Apk----------------///
-///flutter build apk --build-name=1.0.x --build-number=x

@@ -115,7 +115,7 @@ class Body extends StatelessWidget {
 									'description': 'hallway'}
 							];
 
-							Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(name: '', devices: devices)));
+							Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(name: 'Dat', devices: devices)));
 						},
 						child: Container(
 					width: double.infinity,
