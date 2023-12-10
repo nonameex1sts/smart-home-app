@@ -1,5 +1,5 @@
-import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/add_device/add_device.dart';
+import 'package:SmartHome/config/size_config.dart';
+import 'package:SmartHome/src/screens/add_device/add_device.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
-import 'package:domus/provider/getit.dart';
-import 'package:domus/service/navigation_service.dart';
-import 'package:domus/src/screens/login_screen/login_screen.dart';
+import 'package:SmartHome/provider/getit.dart';
+import 'package:SmartHome/service/navigation_service.dart';
+import 'package:SmartHome/src/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

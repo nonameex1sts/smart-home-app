@@ -4,11 +4,11 @@
 // utility that Flutter provides. For example, you can send tap and scroll
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
-import 'package:domus/provider/getit.dart';
+import 'package:SmartHome/provider/getit.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:domus/main.dart';
+import 'package:SmartHome/main.dart';
 
 void main() {
   testWidgets('My test', (WidgetTester tester) async {

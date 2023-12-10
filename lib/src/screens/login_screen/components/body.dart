@@ -1,5 +1,5 @@
-import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/home_screen/home_screen.dart';
+import 'package:SmartHome/config/size_config.dart';
+import 'package:SmartHome/src/screens/home_screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -104,13 +104,16 @@ class Body extends StatelessWidget {
 					child: InkWell(
 						onTap: (){
 							dynamic devices = [
-								{'type': 'Light',
+								{'id': 1,
+									'type': 'Light',
 								'isOn': false,
 								'description': '4 lamps'},
-								{'type': 'Fan',
+								{'id': 2,
+									'type': 'Fan',
 								'isOn': false,
 								'description': 'living room'},
-								{'type': 'Light',
+								{ 'id': 3,
+									'type': 'Light',
 									'isOn': true,
 									'description': 'hallway'}
 							];

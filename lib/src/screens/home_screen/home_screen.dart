@@ -1,5 +1,5 @@
-import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/edit_profile/edit_profile.dart';
+import 'package:SmartHome/config/size_config.dart';
+import 'package:SmartHome/src/screens/edit_profile/edit_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

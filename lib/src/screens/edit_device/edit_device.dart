@@ -1,8 +1,11 @@
-import 'package:domus/src/screens/edit_device/components/body.dart';
+import 'package:SmartHome/src/screens/edit_device/components/body.dart';
 import 'package:flutter/material.dart';
 
 class EditDevice extends StatelessWidget {
-  const EditDevice({Key? key}) : super(key: key);
+  final int id;
+  final String type;
+  final String description;
+  const EditDevice({Key? key, required this.id, required this.type, required this.description}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +13,9 @@ class EditDevice extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: Color(0xFFF2F2F2),
-        body: Body(),
+        body: Body(id: id, type: type, description: description),
       ),
     );
   }

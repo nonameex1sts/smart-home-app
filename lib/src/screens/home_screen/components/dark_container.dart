@@ -1,9 +1,10 @@
-import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/edit_device/edit_device.dart';
+import 'package:SmartHome/config/size_config.dart';
+import 'package:SmartHome/src/screens/edit_device/edit_device.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DarkContainer extends StatefulWidget {
+  final int id;
   final String iconAsset;
   final String type;
   final String description;
@@ -14,6 +15,7 @@ class DarkContainer extends StatefulWidget {
     required this.type,
     required this.description,
     required this.isOn,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -61,7 +63,8 @@ class _DarkContainerState extends State<DarkContainer> {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const EditDevice(),));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                        EditDevice(id: widget.id, type: widget.type, description: widget.description,),));
                   },
                   child:  const Icon(
                     Icons.edit,

@@ -1,4 +1,4 @@
-import 'package:domus/config/size_config.dart';
+import 'package:SmartHome/config/size_config.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatefulWidget {
@@ -9,10 +9,8 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -58,18 +56,18 @@ class _BodyState extends State<Body> {
               children: [
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: nameController,
+                  controller: typeController,
                   autofocus: false,
                   textCapitalization: TextCapitalization.words,
                   validator: (value) {
                     if (value!.isEmpty || value.trim().isEmpty) {
-                      return 'Name is required';
+                      return 'Type is required';
                     }
                     return null;
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Attribute 1',
+                    hintText: 'Type',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
@@ -103,108 +101,18 @@ class _BodyState extends State<Body> {
                 ),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: usernameController,
+                  controller: descriptionController,
                   autofocus: false,
                   keyboardType: TextInputType.text,
                   validator: (value){
                     if(value!.isEmpty || value.trim().isEmpty){
-                      return 'Username is required';
+                      return 'Description is required';
                     }
                     return null;
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Attribute 2',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    icon: Container(
-                      height: 50,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                      ),
-                    ),
-                    border: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    enabled: true,
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    errorBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: getProportionateScreenHeight(20),
-                ),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: emailController,
-                  autofocus: false,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value){
-                    if(value!.isEmpty || value.trim().isEmpty){
-                      return 'Email is required';
-                    }
-                    return null;
-                  },
-                  cursorColor: Colors.black12,
-                  decoration: InputDecoration(
-                    hintText: 'Attribute 3',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    icon: Container(
-                      height: 50,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
-                      ),
-                    ),
-                    border: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                    enabled: true,
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    errorBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: getProportionateScreenHeight(20),
-                ),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: phoneController,
-                  autofocus: false,
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if(value!.isEmpty || value.trim().isEmpty) {
-                      return 'Phone no. is required';
-                    }
-                    return null;
-                  },
-                  cursorColor: Colors.black12,
-                  decoration: InputDecoration(
-                    hintText: 'Attribute 4',
+                    hintText: 'Description',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,

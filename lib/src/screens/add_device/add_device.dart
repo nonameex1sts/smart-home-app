@@ -1,4 +1,4 @@
-import 'package:domus/src/screens/add_device/components/body.dart';
+import 'package:SmartHome/src/screens/add_device/components/body.dart';
 import 'package:flutter/material.dart';
 
 class AddDevice extends StatelessWidget {

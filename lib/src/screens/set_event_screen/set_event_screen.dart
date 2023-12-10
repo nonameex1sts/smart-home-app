@@ -1,7 +1,7 @@
-import 'package:domus/config/size_config.dart';
+import 'package:SmartHome/config/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:domus/src/screens/set_event_screen/components.dart';
+import 'package:SmartHome/src/screens/set_event_screen/components.dart';
 
 class SetEventScreen extends StatefulWidget {
   const SetEventScreen({Key? key}) : super(key: key);

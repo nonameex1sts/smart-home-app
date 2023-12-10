@@ -1,5 +1,5 @@
-import 'package:domus/config/size_config.dart';
-import 'package:domus/src/screens/home_screen/components/weather_container.dart';
+import 'package:SmartHome/config/size_config.dart';
+import 'package:SmartHome/src/screens/home_screen/components/weather_container.dart';
 import 'package:flutter/material.dart';
 
 import 'add_device_widget.dart';
@@ -46,6 +46,7 @@ class Body extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.all(getProportionateScreenHeight(5)),
                       child: DarkContainer(
+                        id: devices[i]['id'],
                         isOn: devices[i]['isOn'],
                         iconAsset: getIconAsset(devices[i]['type']),
                         type: devices[i]['type'],
@@ -58,6 +59,7 @@ class Body extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(getProportionateScreenHeight(5)),
                         child: DarkContainer(
+                          id: devices[i + 1]['id'],
                           isOn: devices[i + 1]['isOn'],
                           iconAsset: getIconAsset(devices[i + 1]['type']),
                           type: devices[i + 1]['type'],
