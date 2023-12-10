@@ -9,19 +9,6 @@ class Body extends StatelessWidget {
   dynamic devices;
   Body({Key? key, required this.devices}) : super(key: key);
 
-  String getIconAsset(String type) {
-    switch (type) {
-      case 'AC':
-        return 'assets/icons/svg/ac.svg';
-      case 'Fan':
-        return 'assets/icons/svg/fan.svg';
-      case 'Speaker':
-        return 'assets/icons/svg/speaker.svg';
-      default:
-        return 'assets/icons/svg/light.svg';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -48,7 +35,6 @@ class Body extends StatelessWidget {
                       child: DarkContainer(
                         id: devices[i]['id'],
                         isOn: devices[i]['isOn'],
-                        iconAsset: getIconAsset(devices[i]['type']),
                         type: devices[i]['type'],
                         description: devices[i]['description'],
                       ),
@@ -61,7 +47,6 @@ class Body extends StatelessWidget {
                         child: DarkContainer(
                           id: devices[i + 1]['id'],
                           isOn: devices[i + 1]['isOn'],
-                          iconAsset: getIconAsset(devices[i + 1]['type']),
                           type: devices[i + 1]['type'],
                           description: devices[i]['description'],
                         ),

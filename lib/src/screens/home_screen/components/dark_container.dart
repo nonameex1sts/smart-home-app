@@ -5,13 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class DarkContainer extends StatefulWidget {
   final int id;
-  final String iconAsset;
   final String type;
   final String description;
   bool isOn;
   DarkContainer({
     Key? key,
-    required this.iconAsset,
     required this.type,
     required this.description,
     required this.isOn,
@@ -56,9 +54,19 @@ class _DarkContainerState extends State<DarkContainer> {
                     borderRadius:
                         const BorderRadius.all(Radius.elliptical(45, 45)),
                   ),
-                  child: SvgPicture.asset(
-                    widget.iconAsset,
-                    color: widget.isOn ? Colors.amber : const Color(0xFF808080),
+                  child: Icon(
+                    widget.type == 'Light' ? (widget.isOn ? Icons.lightbulb : Icons.lightbulb_outline) :
+                    (widget.type == 'Air Conditioner' ? (widget.isOn ? Icons.ac_unit : Icons.ac_unit_outlined) :
+                    (widget.type == 'Fan' ? (widget.isOn ? Icons.wind_power : Icons.mode_fan_off_outlined) :
+                    (widget.type == 'TV' ? (widget.isOn ? Icons.tv : Icons.tv_off) :
+                    (widget.type == 'Door' ? (widget.isOn ? Icons.door_front_door : Icons.door_sliding) :
+                    (widget.type == 'Window' ? (widget.isOn ? Icons.window : Icons.window_sharp) :
+                    (widget.type == 'Washing Machine' ? (widget.isOn ? Icons.wash : Icons.wash_outlined) :
+                    (widget.type == 'Refrigerator' ? (widget.isOn ? Icons.kitchen : Icons.kitchen_outlined) :
+                    (widget.type == 'Microwave' ? (widget.isOn ? Icons.microwave : Icons.microwave_outlined) :
+                    (widget.isOn ? Icons.memory : Icons.memory_outlined))))))))),
+                    color: widget.isOn ? Colors.white : Colors.black,
+                    size: 40,
                   ),
                 ),
                 InkWell(
@@ -101,7 +109,8 @@ class _DarkContainerState extends State<DarkContainer> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.isOn ? 'On' : 'Off',
+                  widget.type == 'Door' ? (widget.isOn ? 'Open' : 'Close') :
+                  (widget.isOn ? 'On' : 'Off'),
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.headline2!.copyWith(
                         color: widget.isOn ? Colors.white : Colors.black,

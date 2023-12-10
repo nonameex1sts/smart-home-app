@@ -113,7 +113,7 @@ class Body extends StatelessWidget {
 								'isOn': false,
 								'description': 'living room'},
 								{ 'id': 3,
-									'type': 'Light',
+									'type': 'Door',
 									'isOn': true,
 									'description': 'hallway'}
 							];

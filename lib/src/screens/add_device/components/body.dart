@@ -54,47 +54,51 @@ class _BodyState extends State<Body> {
             key: _formKey,
             child: Column(
               children: [
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: typeController,
-                  autofocus: false,
-                  textCapitalization: TextCapitalization.words,
-                  validator: (value) {
-                    if (value!.isEmpty || value.trim().isEmpty) {
-                      return 'Type is required';
-                    }
-                    return null;
-                  },
-                  cursorColor: Colors.black12,
-                  decoration: InputDecoration(
-                    hintText: 'Type',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    icon: Container(
-                      height: 50,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(15),
+                DropdownButtonFormField(
+                    items: ['Light', 'Fan', 'Door', 'Air Conditioner', 'TV', 'Window',
+                      'Washing Machine', 'Refrigerator', 'Microwave', 'Other'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    isExpanded: true,
+                    hint: const Text("Select type of device"),
+                    value: typeController.text.isEmpty ? null : typeController.text,
+                    decoration: InputDecoration(
+                      icon: Container(
+                        height: 50,
+                        width: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.edit,
-                        color: Colors.white,
+                      border: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black38),
+                      ),
+                      enabled: true,
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black38),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      errorBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.redAccent),
                       ),
                     ),
-                    border: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    enabled: true,
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    errorBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
+                    onChanged: (selectedValue) {
+                      if (selectedValue != null) {
+                        setState(() {
+                          typeController.text = selectedValue.toString();
+                        });
+                      }
+                    },
                 ),
                 SizedBox(
                   height: getProportionateScreenHeight(20),
