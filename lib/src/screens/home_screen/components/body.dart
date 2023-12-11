@@ -1,13 +1,37 @@
+import 'dart:convert';
+
 import 'package:SmartHome/config/size_config.dart';
 import 'package:SmartHome/src/screens/home_screen/components/weather_container.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'add_device_widget.dart';
 import 'dark_container.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   dynamic devices;
   Body({Key? key, required this.devices}) : super(key: key);
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  Future<void> updateDevices() async {
+    var url = Uri.http('localhost:3000', 'products');
+    var response = await http.get(url);
+
+    print(response.statusCode);
+
+    if(response.statusCode == 200){
+      var newDevices = jsonDecode(response.body);
+      setState(() {
+        widget.devices = newDevices;
+      });
+    }
+
+    print(widget.devices);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +50,31 @@ class Body extends StatelessWidget {
               padding: EdgeInsets.all(getProportionateScreenHeight(5)),
               child: WeatherContainer(),
             ),
-            for (int i = 0; i < devices.length; i+=2)
+            for (int i = 0; i < widget.devices.length; i+=2)
               Row(
                 children: [
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.all(getProportionateScreenHeight(5)),
                       child: DarkContainer(
-                        id: devices[i]['id'],
-                        isOn: devices[i]['isOn'],
-                        type: devices[i]['type'],
-                        description: devices[i]['description'],
+                        id: widget.devices[i]['id'],
+                        isOn: widget.devices[i]['isOn'],
+                        type: widget.devices[i]['type'],
+                        description: widget.devices[i]['description'],
+                        updateDevices: updateDevices,
                       ),
                     ),
                   ),
-                  if (i + 1 < devices.length)
+                  if (i + 1 < widget.devices.length)
                     Expanded(
                       child: Padding(
                         padding: EdgeInsets.all(getProportionateScreenHeight(5)),
                         child: DarkContainer(
-                          id: devices[i + 1]['id'],
-                          isOn: devices[i + 1]['isOn'],
-                          type: devices[i + 1]['type'],
-                          description: devices[i]['description'],
+                          id: widget.devices[i + 1]['id'],
+                          isOn: widget.devices[i + 1]['isOn'],
+                          type: widget.devices[i + 1]['type'],
+                          description: widget.devices[i]['description'],
+                          updateDevices: updateDevices,
                         ),
                       ),
                     )
@@ -58,7 +84,7 @@ class Body extends StatelessWidget {
               ),
             Padding(
               padding: EdgeInsets.all(getProportionateScreenHeight(8)),
-              child: const AddNewDevice(),
+              child:  AddNewDevice(updateDevices: updateDevices,),
             ),
           ],
         ),

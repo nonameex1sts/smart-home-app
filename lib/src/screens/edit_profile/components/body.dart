@@ -11,11 +11,11 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  bool passwordVisible = false;
   TextEditingController nameController = TextEditingController();
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -102,70 +102,96 @@ class _BodyState extends State<Body> {
             height: getProportionateScreenHeight(20),
           ),
           Form(
-            key: _formKey,
+            child:
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: passwordController,
+              autofocus: false,
+              textCapitalization: TextCapitalization.words,
+              obscureText: !passwordVisible,
+              validator: (value) {
+                if (value!.length < 8) {
+                  return 'Password must be at lest 8 characters';
+                }
+                return null;
+              },
+              cursorColor: Colors.black12,
+              decoration: InputDecoration(
+                hintText: 'New password',
+                hintStyle: const TextStyle(color: Colors.grey),
+                suffixIcon: IconButton(
+                    onPressed: (){
+                      setState(() {
+                        passwordVisible = !passwordVisible;
+                      });
+                    },
+                    icon: const
+                    Icon(Icons.remove_red_eye, color: Colors.black,)
+                ),
+                icon: Container(
+                  height: 50,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: const Icon(
+                    Icons.key,
+                    color: Colors.white,
+                  ),
+                ),
+                border: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black38),
+                ),
+                enabled: true,
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black38),
+                ),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                errorBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.redAccent),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
+          Container(
+            height: getProportionateScreenHeight(40),
+            decoration: BoxDecoration(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: InkWell(
+              onTap: () {},
+              child: const Center(
+                  child: Text('Change password', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
+              ),
+            ),
+          ),
+          SizedBox(
+            height: getProportionateScreenHeight(50),
+          ),
+          Form(
             child: Column(
               children: [
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: nameController,
                   autofocus: false,
-                  textCapitalization: TextCapitalization.words,
-                  validator: (value) {
-                    if (value!.isEmpty || value.trim().isEmpty) {
+                  keyboardType: TextInputType.text,
+                  validator: (value){
+                    if(value!.isEmpty || value.trim().isEmpty){
                       return 'Name is required';
                     }
                     return null;
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your full name',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    icon: Container(
-                      height: 50,
-                      width: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: const Icon(
-                        Icons.person,
-                        color: Colors.white,
-                      ),
-                    ),
-                    // prefixIcon: Icon(Icons.person, size: 25, color: Colors.grey,),
-                    // contentPadding: EdgeInsets.only(left: 30),
-                    border: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    enabled: true,
-                    enabledBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black38),
-                    ),
-                    focusedBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                    errorBorder: const UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.redAccent),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: getProportionateScreenHeight(20),
-                ),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: usernameController,
-                  autofocus: false,
-                  keyboardType: TextInputType.text,
-                  validator: (value){
-                    if(value!.isEmpty || value.trim().isEmpty){
-                      return 'Username is required';
-                    }
-                    return null;
-                  },
-                  cursorColor: Colors.black12,
-                  decoration: InputDecoration(
-                    hintText: 'Username',
+                    hintText: 'Your name',
                     hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
@@ -220,7 +246,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.email,
                         color: Colors.white,
                       ),
                     ),
@@ -265,7 +291,7 @@ class _BodyState extends State<Body> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: const Icon(
-                        Icons.person,
+                        Icons.phone,
                         color: Colors.white,
                       ),
                     ),
@@ -299,7 +325,7 @@ class _BodyState extends State<Body> {
             child: InkWell(
               onTap: () {},
               child: const Center(
-                  child: Text('Save Changes', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
+                  child: Text('Change personal information', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),
             ),
           ),
@@ -309,7 +335,7 @@ class _BodyState extends State<Body> {
           Container(
             height: getProportionateScreenHeight(40),
             decoration: BoxDecoration(
-              color: Colors.black87,
+              color: Colors.red,
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(

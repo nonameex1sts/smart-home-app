@@ -4,14 +4,20 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class AddNewDevice extends StatelessWidget {
-  const AddNewDevice({Key? key}) : super(key: key);
+  final VoidCallback? updateDevices;
+
+  const AddNewDevice({Key? key, this.updateDevices}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-            AddDevice()));
+      onTap: () async {
+        String status = await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+            AddDevice(), maintainState: false));
+
+        if(status == 'update'){
+          updateDevices?.call();
+        }
       },
       child: DottedBorder(
         borderType: BorderType.RRect,

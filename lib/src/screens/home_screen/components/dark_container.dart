@@ -2,18 +2,21 @@ import 'package:SmartHome/config/size_config.dart';
 import 'package:SmartHome/src/screens/edit_device/edit_device.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
 
 class DarkContainer extends StatefulWidget {
-  final int id;
+  final String id;
   final String type;
-  final String description;
+  String description;
   bool isOn;
+  final VoidCallback? updateDevices;
   DarkContainer({
     Key? key,
     required this.type,
     required this.description,
     required this.isOn,
     required this.id,
+    this.updateDevices,
   }) : super(key: key);
 
   @override
@@ -59,7 +62,7 @@ class _DarkContainerState extends State<DarkContainer> {
                     (widget.type == 'Air Conditioner' ? (widget.isOn ? Icons.ac_unit : Icons.ac_unit_outlined) :
                     (widget.type == 'Fan' ? (widget.isOn ? Icons.wind_power : Icons.mode_fan_off_outlined) :
                     (widget.type == 'TV' ? (widget.isOn ? Icons.tv : Icons.tv_off) :
-                    (widget.type == 'Door' ? (widget.isOn ? Icons.door_front_door : Icons.door_sliding) :
+                    (widget.type == 'Door' ? (widget.isOn ? Icons.door_sliding : Icons.door_front_door) :
                     (widget.type == 'Window' ? (widget.isOn ? Icons.window : Icons.window_sharp) :
                     (widget.type == 'Washing Machine' ? (widget.isOn ? Icons.wash : Icons.wash_outlined) :
                     (widget.type == 'Refrigerator' ? (widget.isOn ? Icons.kitchen : Icons.kitchen_outlined) :
@@ -70,9 +73,18 @@ class _DarkContainerState extends State<DarkContainer> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        EditDevice(id: widget.id, type: widget.type, description: widget.description,),));
+                  onTap: () async {
+                    String status = await Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                        EditDevice(id: widget.id, type: widget.type, description: widget.description,), maintainState: false));
+
+                    if (status == 'delete') {
+                      widget.updateDevices!();
+                    }
+                    else{
+                      setState(() {
+                        widget.description = status;
+                      });
+                    }
                   },
                   child:  const Icon(
                     Icons.edit,
@@ -117,7 +129,13 @@ class _DarkContainerState extends State<DarkContainer> {
                       ),
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () async {
+                    var url = Uri.http('localhost:3000', 'productss');
+                    var response = await http.put(url, body: {
+                      'id': widget.id,
+                      'isOn': (!widget.isOn).toString(),
+                    });
+
                     setState(() {
                       widget.isOn = !widget.isOn;
                     });

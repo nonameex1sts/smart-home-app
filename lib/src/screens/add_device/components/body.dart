@@ -1,5 +1,6 @@
 import 'package:SmartHome/config/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
@@ -158,7 +159,17 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                if(_formKey.currentState!.validate()){
+                  var url = Uri.http('localhost:3000', 'products');
+                  var response = await http.post(url, body: {
+                    'type': typeController.text,
+                    'description': descriptionController.text,
+                  });
+
+                  Navigator.pop(context, 'update');
+                }
+              },
               child: const Center(
                   child: Text('Add device', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),

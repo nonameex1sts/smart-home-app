@@ -2,7 +2,7 @@ import 'package:SmartHome/src/screens/edit_device/components/body.dart';
 import 'package:flutter/material.dart';
 
 class EditDevice extends StatelessWidget {
-  final int id;
+  final String id;
   final String type;
   final String description;
   const EditDevice({Key? key, required this.id, required this.type, required this.description}) : super(key: key);

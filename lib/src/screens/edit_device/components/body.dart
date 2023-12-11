@@ -1,8 +1,9 @@
 import 'package:SmartHome/config/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
-  final int id;
+  final String id;
   final String type;
   final String description;
   const Body({Key? key, required this.id, required this.type, required this.description}) : super(key: key);
@@ -66,7 +67,7 @@ class _BodyState extends State<Body> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   autofocus: false,
                   textCapitalization: TextCapitalization.words,
-                  initialValue: widget.id.toString(),
+                  initialValue: widget.id,
                   readOnly: true,
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
@@ -191,7 +192,16 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                if(_formKey.currentState!.validate()){
+                  var url = Uri.http('localhost:3000', 'products');
+                  var response = await http.put(url, body: {
+                    'id': widget.id,
+                    'description': descriptionController.text,
+                  });
+
+                  Navigator.pop(context, descriptionController.text);
+                }},
               child: const Center(
                   child: Text('Save Changes', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),
@@ -207,7 +217,16 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                if(_formKey.currentState!.validate()){
+                  var url = Uri.http('localhost:3000', 'products');
+                  var response = await http.delete(url, body: {
+                    'id': widget.id,
+                  });
+                };
+
+                Navigator.pop(context, 'delete');
+              },
               child: const Center(
                   child: Text('Delete device', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),
