@@ -41,16 +41,8 @@ flutter_native_splash:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/favourite.png
     - assets/images/
-    - assets/icons/
     - assets/fonts/
-    - assets/images/weather/
-    - assets/images/settings/
-    - assets/icons/svg/
-    - assets/Lottie/
-    - assets/icons/menu_icons/
-    - assets/images/movies/
 
   fonts:
     - family: "Noto Sans"
