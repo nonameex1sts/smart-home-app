@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:SmartHome/config/size_config.dart';
 import 'package:SmartHome/src/screens/home_screen/home_screen.dart';
@@ -178,20 +179,44 @@ class _BodyState extends State<Body> {
 					padding: const EdgeInsets.only(left: 20.0, right: 20),
 					child: InkWell(
 						onTap: () async {
-							var username = usernameController.text;
-							var password = passwordController.text;
+							var response = await http.post(
+								Uri.parse('https://c954-27-70-18-164.ngrok-free.app/login'),
+								headers: <String, String>{
+									'Content-Type': 'application/json; charset=UTF-8',
+								},
+								body: jsonEncode({
+									'email': usernameController.text,
+									'password': passwordController.text,
+								}),
+							);
 
-							if(username.isEmpty || password.isEmpty){
-								showLoginWarning();
+
+							if(response.statusCode == 200){
+								var data = jsonDecode(response.body);
+								var name = data['data']['name'];
+								var email = data['data']['email'];
+								var phone = data['data']['phone'];
+								String token = data['accessToken'];
+
+								var deviceResponse = await http.get(
+									Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/get-all'),
+									headers: {
+										HttpHeaders.authorizationHeader: "Bearer $token",
+										"ngrok-skip-browser-warning": "69420"
+									},
+								);
+
+								print(token);
+								print(deviceResponse.body);
+
+								var devices = jsonDecode(deviceResponse.body);
+								print(devices);
+
+								Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+										HomeScreen(name: 'Dat', email: email, phone: phone, token: token, devices: devices['data'])));
 							}
 							else{
-								var url = Uri.http('localhost:3000', 'products');
-								var response = await http.get(url);
-
-								if(response.statusCode == 200){
-									var devices = jsonDecode(response.body);
-									Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen(name: 'Dat', devices: devices)));
-								}
+								showLoginWarning();
 							}
 						},
 						child: Container(

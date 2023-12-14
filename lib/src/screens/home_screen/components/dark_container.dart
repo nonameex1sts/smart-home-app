@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:SmartHome/config/size_config.dart';
 import 'package:SmartHome/src/screens/edit_device/edit_device.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class DarkContainer extends StatefulWidget {
+  final String token;
   final String id;
   final String type;
   String description;
@@ -16,6 +20,7 @@ class DarkContainer extends StatefulWidget {
     required this.isOn,
     required this.id,
     this.updateDevices,
+    required this.token,
   }) : super(key: key);
 
   @override
@@ -73,8 +78,10 @@ class _DarkContainerState extends State<DarkContainer> {
                 ),
                 InkWell(
                   onTap: () async {
+                    print(widget.description);
+
                     String? status = await Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                        EditDevice(id: widget.id, type: widget.type, description: widget.description,), maintainState: false));
+                        EditDevice(id: widget.id, type: widget.type, description: widget.description, token: widget.token,), maintainState: false));
 
                     if (status != null){
                       if (status == 'delete') {
@@ -131,11 +138,20 @@ class _DarkContainerState extends State<DarkContainer> {
                 ),
                 InkWell(
                   onTap: () async {
-                    var url = Uri.http('localhost:3000', 'productss');
-                    var response = await http.put(url, body: {
-                      'id': widget.id,
-                      'isOn': (!widget.isOn).toString(),
-                    });
+                    var response = await http.put(
+                      Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/status'),
+                      headers: {
+                        HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
+                        'Content-Type': 'application/json; charset=UTF-8',
+                        "ngrok-skip-browser-warning": "69420"
+                      },
+                      body: jsonEncode({
+                        'deviceId': widget.id,
+                        'isOn': !widget.isOn,
+                      }),
+                    );
+
+                    print(response.body);
 
                     setState(() {
                       widget.isOn = !widget.isOn;

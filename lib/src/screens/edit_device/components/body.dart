@@ -1,12 +1,16 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:SmartHome/config/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
+  final String token;
   final String id;
   final String type;
   final String description;
-  const Body({Key? key, required this.id, required this.type, required this.description}) : super(key: key);
+  const Body({Key? key, required this.id, required this.type, required this.description, required this.token}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -14,6 +18,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   TextEditingController descriptionController = TextEditingController();
+  TextEditingController messageController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -229,12 +234,20 @@ class _BodyState extends State<Body> {
             child: InkWell(
               onTap: () async {
                 if(_formKey.currentState!.validate()){
-                  var url = Uri.http('localhost:3000', 'products');
-                  var response = await http.put(url, body: {
-                    'id': widget.id,
-                    'description': descriptionController.text,
-                  });
+                  var response = await http.put(
+                    Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/description'),
+                    headers: {
+                      HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
+                      'Content-Type': 'application/json; charset=UTF-8',
+                      "ngrok-skip-browser-warning": "69420"
+                    },
+                    body: jsonEncode(<String, String>{
+                      'deviceId': widget.id,
+                      'description': descriptionController.text,
+                    }),
+                  );
 
+                  print(response.body);
                   Navigator.pop(context, descriptionController.text);
                 }},
               child: const Center(
@@ -258,10 +271,19 @@ class _BodyState extends State<Body> {
                 if(delete != null) {
                   if(delete){
                     if(_formKey.currentState!.validate()){
-                      var url = Uri.http('localhost:3000', 'products');
-                      var response = await http.delete(url, body: {
-                        'id': widget.id,
-                      });
+                      var response = await http.delete(
+                        Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/delete'),
+                        headers: {
+                          HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
+                          'Content-Type': 'application/json; charset=UTF-8',
+                          "ngrok-skip-browser-warning": "69420"
+                        },
+                        body: jsonEncode(<String, String>{
+                          'deviceId': widget.id,
+                        }),
+                      );
+
+                      print(response.body);
                     };
 
                     Navigator.pop(context, 'delete');
@@ -273,6 +295,82 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
+
+          if(widget.type == 'TV')
+            SizedBox(
+              height: getProportionateScreenHeight(50),
+            ),
+          if(widget.type == 'TV')
+            TextFormField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              autofocus: false,
+              textCapitalization: TextCapitalization.words,
+              controller: messageController,
+              cursorColor: Colors.black12,
+              decoration: InputDecoration(
+                hintText: 'Message',
+                icon: Container(
+                  height: 50,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                ),
+                border: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black38),
+                ),
+                enabled: true,
+                enabledBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black38),
+                ),
+                focusedBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black),
+                ),
+                errorBorder: const UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.redAccent),
+                ),
+              ),
+            ),
+          if(widget.type == 'TV')
+            SizedBox(
+              height: getProportionateScreenHeight(20),
+            ),
+          if(widget.type == 'TV')
+            Container(
+              height: getProportionateScreenHeight(40),
+              decoration: BoxDecoration(
+                color: Colors.black87,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: InkWell(
+                onTap: () async {
+                  if(_formKey.currentState!.validate()){
+                    var response = await http.put(
+                      Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/status'),
+                      headers: {
+                        HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
+                        'Content-Type': 'application/json; charset=UTF-8',
+                        "ngrok-skip-browser-warning": "69420"
+                      },
+                      body: jsonEncode({
+                        'deviceId': widget.id,
+                        'message': messageController.text,
+                      }),
+                    );
+
+                    print(response.body);
+                    Navigator.pop(context, descriptionController.text);
+                  }},
+                child: const Center(
+                    child: Text('Send message', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
+                ),
+              ),
+            ),
         ],
       ),
     );

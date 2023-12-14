@@ -2,7 +2,8 @@ import 'package:SmartHome/src/screens/add_device/components/body.dart';
 import 'package:flutter/material.dart';
 
 class AddDevice extends StatelessWidget {
-  const AddDevice({Key? key}) : super(key: key);
+  final String token;
+  const AddDevice({Key? key, required this.token}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,9 +11,9 @@ class AddDevice extends StatelessWidget {
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
-      child: const Scaffold(
-        backgroundColor: Color(0xFFF2F2F2),
-        body: Body(),
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF2F2F2),
+        body: Body(token: token,),
       ),
     );
   }

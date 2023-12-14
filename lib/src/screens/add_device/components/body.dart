@@ -1,9 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:SmartHome/config/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  final String token;
+  const Body({Key? key, required this.token}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -56,8 +60,8 @@ class _BodyState extends State<Body> {
             child: Column(
               children: [
                 DropdownButtonFormField(
-                    items: ['Light', 'Fan', 'Door', 'Air Conditioner', 'TV', 'Window',
-                      'Washing Machine', 'Refrigerator', 'Microwave', 'Other'].map((String value) {
+                  // 'Air Conditioner', 'Window', 'Washing Machine', 'Refrigerator', 'Microwave',
+                    items: ['Light', 'Fan', 'Door', 'TV', 'Other'].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -161,11 +165,21 @@ class _BodyState extends State<Body> {
             child: InkWell(
               onTap: () async {
                 if(_formKey.currentState!.validate()){
-                  var url = Uri.http('localhost:3000', 'products');
-                  var response = await http.post(url, body: {
-                    'type': typeController.text,
-                    'description': descriptionController.text,
-                  });
+                  var response = await http.post(
+                    Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/add'),
+                    headers: {
+                      HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
+                      'Content-Type': 'application/json; charset=UTF-8',
+                      "ngrok-skip-browser-warning": "69420"
+                    },
+                    body: jsonEncode({
+                      'type': typeController.text,
+                      'isOn': false,
+                      'description': descriptionController.text,
+                    }),
+                  );
+
+                  print(response.body);
 
                   Navigator.pop(context, 'update');
                 }

@@ -7,10 +7,13 @@ import '../set_event_screen/set_event_screen.dart';
 import 'components/body.dart';
 
 class HomeScreen extends StatelessWidget {
-  String name;
+  final String name;
+  final String email;
+  final String phone;
+  final String token;
   dynamic devices;
 
-  HomeScreen({Key? key, required this.name, required this.devices}) : super(key: key);
+  HomeScreen({Key? key, required this.name, required this.devices, required this.email, required this.phone, required this.token}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '$name\'s home',
+                          'My home',
                           style: Theme.of(context).textTheme.headline1,
                         ),
                         Container(
@@ -88,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                body: Body(devices: devices,),
+                body: Body(devices: devices, token: token),
               ),
             ),
     );
