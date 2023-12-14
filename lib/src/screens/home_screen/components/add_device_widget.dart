@@ -12,11 +12,13 @@ class AddNewDevice extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        String status = await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+        String? status = await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
             AddDevice(), maintainState: false));
 
-        if(status == 'update'){
-          updateDevices?.call();
+        if (status != null) {
+          if(status == 'update'){
+            updateDevices?.call();
+          }
         }
       },
       child: DottedBorder(

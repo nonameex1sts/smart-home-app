@@ -20,6 +20,7 @@ class HomeScreen extends StatelessWidget {
               length: 3,
               child: Scaffold(
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   toolbarHeight: getProportionateScreenHeight(60),
                   elevation: 0,
                   iconTheme: const IconThemeData(color: Colors.black),
@@ -47,11 +48,15 @@ class HomeScreen extends StatelessWidget {
                               FontAwesomeIcons.solidUser,
                               color: Colors.amber,
                             ),
-                            onPressed: () {
-                              // Navigator.of(context).pushNamed(EditProfile.routeName);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfile(),));
-                            },
+                            onPressed: () async {
+                              String? status = await Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfile(),));
 
+                              if (status != null) {
+                                if(status == 'logout'){
+                                  Navigator.of(context).pop();
+                                }
+                              }
+                            },
                           ),
                         ),
                         Text(

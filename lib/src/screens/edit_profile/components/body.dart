@@ -19,6 +19,111 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    Future<bool?> showLogoutWarning() async {
+      return showDialog<bool>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Logout', style: TextStyle(color: Colors.red, fontSize: 24), textAlign: TextAlign.center,),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  Text('Are you sure?', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('No', style: TextStyle(color: Colors.grey, fontSize: 20)),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              const SizedBox(width: 150),
+              TextButton(
+                child: const Text('Yes', style: TextStyle(color: Colors.red, fontSize: 20)),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    Future<bool?> showPasswordWarning() async {
+      return showDialog<bool>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Change password', style: TextStyle(color: Colors.red, fontSize: 24), textAlign: TextAlign.center,),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  Text('Are you sure?', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('No', style: TextStyle(color: Colors.grey, fontSize: 20)),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              const SizedBox(width: 150),
+              TextButton(
+                child: const Text('Yes', style: TextStyle(color: Colors.red, fontSize: 20)),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    Future<bool?> showPersonalInformationWarning() async {
+      return showDialog<bool>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Change personal information', style: TextStyle(color: Colors.red, fontSize: 24), textAlign: TextAlign.center,),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  Text('Are you sure?', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('No', style: TextStyle(color: Colors.grey, fontSize: 20)),
+                onPressed: () {
+                  Navigator.pop(context, false);
+                },
+              ),
+              const SizedBox(width: 150),
+              TextButton(
+                child: const Text('Yes', style: TextStyle(color: Colors.red, fontSize: 20)),
+                onPressed: () {
+                  Navigator.pop(context, true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         left: getProportionateScreenWidth(20),
@@ -27,7 +132,6 @@ class _BodyState extends State<Body> {
         bottom: getProportionateScreenHeight(15),
       ),
       child: ListView(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
             height: getProportionateScreenHeight(40),
@@ -38,7 +142,6 @@ class _BodyState extends State<Body> {
               children: [
                 const Text(
                   'Edit Profile',
-                  // style: Theme.of(context).textTheme.headline1,
                   style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
@@ -339,7 +442,15 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                bool? status = await showLogoutWarning();
+
+                if (status != null) {
+                  if(status){
+                    Navigator.pop(context, "logout");
+                  }
+                }
+              },
               child: const Center(
                   child: Text('Log out', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),

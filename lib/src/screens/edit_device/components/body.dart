@@ -24,6 +24,41 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
+    Future<bool?> showDeleteWarning() async {
+      return showDialog<bool>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Delete device', style: TextStyle(color: Colors.red, fontSize: 24), textAlign: TextAlign.center,),
+            content: const SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  Text('Are you sure?', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+                TextButton(
+                  child: const Text('No', style: TextStyle(color: Colors.grey, fontSize: 20)),
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                ),
+                const SizedBox(width: 150),
+                TextButton(
+                  child: const Text('Yes', style: TextStyle(color: Colors.red, fontSize: 20)),
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                ),
+            ],
+          );
+        },
+      );
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         left: getProportionateScreenWidth(20),
@@ -218,14 +253,20 @@ class _BodyState extends State<Body> {
             ),
             child: InkWell(
               onTap: () async {
-                if(_formKey.currentState!.validate()){
-                  var url = Uri.http('localhost:3000', 'products');
-                  var response = await http.delete(url, body: {
-                    'id': widget.id,
-                  });
-                };
+                bool? delete = await showDeleteWarning();
 
-                Navigator.pop(context, 'delete');
+                if(delete != null) {
+                  if(delete){
+                    if(_formKey.currentState!.validate()){
+                      var url = Uri.http('localhost:3000', 'products');
+                      var response = await http.delete(url, body: {
+                        'id': widget.id,
+                      });
+                    };
+
+                    Navigator.pop(context, 'delete');
+                  }
+                }
               },
               child: const Center(
                   child: Text('Delete device', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)

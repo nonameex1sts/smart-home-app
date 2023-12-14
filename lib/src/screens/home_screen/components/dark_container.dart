@@ -73,16 +73,18 @@ class _DarkContainerState extends State<DarkContainer> {
                 ),
                 InkWell(
                   onTap: () async {
-                    String status = await Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                    String? status = await Navigator.push(context, MaterialPageRoute(builder: (context) =>
                         EditDevice(id: widget.id, type: widget.type, description: widget.description,), maintainState: false));
 
-                    if (status == 'delete') {
-                      widget.updateDevices!();
-                    }
-                    else{
-                      setState(() {
-                        widget.description = status;
-                      });
+                    if (status != null){
+                      if (status == 'delete') {
+                        widget.updateDevices!();
+                      }
+                      else{
+                        setState(() {
+                          widget.description = status;
+                        });
+                      }
                     }
                   },
                   child:  const Icon(

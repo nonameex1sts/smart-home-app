@@ -190,7 +190,7 @@ class _BodyState extends State<Body> {
 
 								if(response.statusCode == 200){
 									var devices = jsonDecode(response.body);
-									Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => HomeScreen(name: 'Dat', devices: devices)));
+									Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen(name: 'Dat', devices: devices)));
 								}
 							}
 						},
