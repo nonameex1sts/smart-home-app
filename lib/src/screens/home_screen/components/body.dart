@@ -21,7 +21,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   Future<void> updateDevices() async {
     var response = await http.get(
-      Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/get-all'),
+      Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/get-all'),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
         "ngrok-skip-browser-warning": "69420"

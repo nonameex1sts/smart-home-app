@@ -46,7 +46,7 @@ class AddNewDevice extends StatelessWidget {
                 ),
                 Text(
                   'Add New Device',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ],
             ),

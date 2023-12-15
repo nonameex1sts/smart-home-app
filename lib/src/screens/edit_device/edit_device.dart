@@ -15,7 +15,7 @@ class EditDevice extends StatelessWidget {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
-        backgroundColor: Color(0xFFF2F2F2),
+        backgroundColor: const Color(0xFFF2F2F2),
         body: Body(id: id, type: type, description: description, token: token,),
       ),
     );

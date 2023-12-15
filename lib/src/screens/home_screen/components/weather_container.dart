@@ -16,13 +16,13 @@ class WeatherContainer extends StatefulWidget {
 
 class _WeatherContainerState extends State<WeatherContainer> {
   String temperature = '28°C';
-  String humidity = '70%';
+  String humidity = '50%';
 
   late Timer timer;
 
-  Future<void> init() async {
+  Future<void> initWeatherData() async {
     var response = await http.get(
-      Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/statistics'),
+      Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/statistics'),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
         "ngrok-skip-browser-warning": "69420"
@@ -43,18 +43,16 @@ class _WeatherContainerState extends State<WeatherContainer> {
   void initState()  {
     super.initState();
 
-    init();
+    initWeatherData();
 
-    timer = Timer.periodic(const Duration(seconds: 15), (timer) async {
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
       var response = await http.get(
-        Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/statistics'),
+        Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/statistics'),
         headers: {
           HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
           "ngrok-skip-browser-warning": "69420"
         },
       );
-
-      print(response.body);
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body)['data'];
@@ -94,11 +92,11 @@ class _WeatherContainerState extends State<WeatherContainer> {
                     const Icon(
                       Icons.thermostat,
                       color: Colors.black,
-                      size: 60,
+                      size: 50,
                     ),
-                    SizedBox(
-                      width: getProportionateScreenWidth(10),
-                    ),
+                    // SizedBox(
+                    //   width: getProportionateScreenWidth(10),
+                    // ),
                     Text(
                       temperature,
                       style: Theme.of(context).textTheme.headlineLarge,
@@ -112,7 +110,7 @@ class _WeatherContainerState extends State<WeatherContainer> {
                     const Icon(
                       Icons.water_drop_rounded,
                       color: Colors.black,
-                      size: 60,
+                      size: 50,
                     ),
                     SizedBox(
                       width: getProportionateScreenWidth(10),

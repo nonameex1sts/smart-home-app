@@ -78,8 +78,6 @@ class _DarkContainerState extends State<DarkContainer> {
                 ),
                 InkWell(
                   onTap: () async {
-                    print(widget.description);
-
                     String? status = await Navigator.push(context, MaterialPageRoute(builder: (context) =>
                         EditDevice(id: widget.id, type: widget.type, description: widget.description, token: widget.token,), maintainState: false));
 
@@ -109,7 +107,7 @@ class _DarkContainerState extends State<DarkContainer> {
                 Text(
                   widget.type,
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline2!.copyWith(
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         color: widget.isOn ? Colors.white : Colors.black,
                       ),
                 ),
@@ -132,14 +130,14 @@ class _DarkContainerState extends State<DarkContainer> {
                   widget.type == 'Door' ? (widget.isOn ? 'Open' : 'Close') :
                   (widget.isOn ? 'On' : 'Off'),
                   textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.headline2!.copyWith(
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
                         color: widget.isOn ? Colors.white : Colors.black,
                       ),
                 ),
                 InkWell(
                   onTap: () async {
                     var response = await http.put(
-                      Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/status'),
+                      Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/status'),
                       headers: {
                         HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
                         'Content-Type': 'application/json; charset=UTF-8',
@@ -150,8 +148,6 @@ class _DarkContainerState extends State<DarkContainer> {
                         'isOn': !widget.isOn,
                       }),
                     );
-
-                    print(response.body);
 
                     setState(() {
                       widget.isOn = !widget.isOn;

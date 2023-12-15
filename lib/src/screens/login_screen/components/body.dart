@@ -92,7 +92,7 @@ class _BodyState extends State<Body> {
 									width: 295.68,
 									height: 60.16,
 									child: Text(
-										'Wellcome home, login to manage your devicess',
+										'Welcome home, login to manage your devices',
 										textAlign: TextAlign.center,
 										style: TextStyle(
 											color: Colors.black,
@@ -180,7 +180,7 @@ class _BodyState extends State<Body> {
 					child: InkWell(
 						onTap: () async {
 							var response = await http.post(
-								Uri.parse('https://c954-27-70-18-164.ngrok-free.app/login'),
+								Uri.parse('https://e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app/login'),
 								headers: <String, String>{
 									'Content-Type': 'application/json; charset=UTF-8',
 								},
@@ -199,21 +199,18 @@ class _BodyState extends State<Body> {
 								String token = data['accessToken'];
 
 								var deviceResponse = await http.get(
-									Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/get-all'),
+									Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/get-all'),
 									headers: {
 										HttpHeaders.authorizationHeader: "Bearer $token",
 										"ngrok-skip-browser-warning": "69420"
 									},
 								);
 
-								print(token);
-								print(deviceResponse.body);
-
 								var devices = jsonDecode(deviceResponse.body);
-								print(devices);
 
+								if (!context.mounted) return;
 								Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-										HomeScreen(name: 'Dat', email: email, phone: phone, token: token, devices: devices['data'])));
+										HomeScreen(name: name, email: email, phone: phone, token: token, devices: devices['data'])));
 							}
 							else{
 								showLoginWarning();
@@ -229,7 +226,7 @@ class _BodyState extends State<Body> {
 					),
 				),
 				SizedBox(height: getProportionateScreenHeight(10)),
-				const Center(child: Text('Don\'t have an account yet?'))
+				const Center(child: Text('Don\'t have an account yet? Contact our admin!'))
       ],
     );
   }

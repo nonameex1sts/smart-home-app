@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  final String name;
+  final String email;
+  final String phone;
+  final String token;
+  const Body({Key? key, required this.name, required this.email, required this.phone, required this.token}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -16,6 +20,14 @@ class _BodyState extends State<Body> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.name);
+    emailController = TextEditingController(text: widget.email);
+    phoneController = TextEditingController(text: widget.phone);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +281,9 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                showPasswordWarning();
+              },
               child: const Center(
                   child: Text('Change password', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),
@@ -278,6 +292,7 @@ class _BodyState extends State<Body> {
           SizedBox(
             height: getProportionateScreenHeight(50),
           ),
+
           Form(
             child: Column(
               children: [
@@ -294,8 +309,6 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your name',
-                    hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
                       width: 40,
@@ -339,8 +352,6 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your Email',
-                    hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
                       width: 40,
@@ -375,7 +386,7 @@ class _BodyState extends State<Body> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: phoneController,
                   autofocus: false,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   validator: (value) {
                     if(value!.isEmpty || value.trim().isEmpty) {
                       return 'Phone no. is required';
@@ -384,8 +395,6 @@ class _BodyState extends State<Body> {
                   },
                   cursorColor: Colors.black12,
                   decoration: InputDecoration(
-                    hintText: 'Your Phone',
-                    hintStyle: const TextStyle(color: Colors.grey),
                     icon: Container(
                       height: 50,
                       width: 40,
@@ -426,7 +435,9 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                showPersonalInformationWarning();
+              },
               child: const Center(
                   child: Text('Change personal information', style: TextStyle(fontSize: 18, color: Colors.white70, fontWeight: FontWeight.bold),)
               ),
@@ -447,6 +458,7 @@ class _BodyState extends State<Body> {
 
                 if (status != null) {
                   if(status){
+                    if (!context.mounted) return;
                     Navigator.pop(context, "logout");
                   }
                 }

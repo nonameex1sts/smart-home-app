@@ -166,7 +166,7 @@ class _BodyState extends State<Body> {
               onTap: () async {
                 if(_formKey.currentState!.validate()){
                   var response = await http.post(
-                    Uri.https('c954-27-70-18-164.ngrok-free.app', 'api/device/add'),
+                    Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/add'),
                     headers: {
                       HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
                       'Content-Type': 'application/json; charset=UTF-8',
@@ -179,8 +179,7 @@ class _BodyState extends State<Body> {
                     }),
                   );
 
-                  print(response.body);
-
+                  if (!context.mounted) return;
                   Navigator.pop(context, 'update');
                 }
               },
