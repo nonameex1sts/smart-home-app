@@ -4,17 +4,18 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
 class AddNewDevice extends StatelessWidget {
+  final String ownerEmail;
   final String token;
   final VoidCallback? updateDevices;
 
-  const AddNewDevice({Key? key, this.updateDevices, required this.token}) : super(key: key);
+  const AddNewDevice({Key? key, this.updateDevices, required this.token, required this.ownerEmail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
         String? status = await Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
-            AddDevice(token: token,), maintainState: false));
+            AddDevice(token: token, ownerEmail: ownerEmail,), maintainState: false));
 
         if (status != null) {
           if(status == 'update'){

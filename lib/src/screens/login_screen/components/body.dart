@@ -180,7 +180,7 @@ class _BodyState extends State<Body> {
 					child: InkWell(
 						onTap: () async {
 							var response = await http.post(
-								Uri.parse('https://e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app/login'),
+								Uri.parse('https://6216-171-234-235-142.ngrok-free.app/login'),
 								headers: <String, String>{
 									'Content-Type': 'application/json; charset=UTF-8',
 								},
@@ -199,7 +199,7 @@ class _BodyState extends State<Body> {
 								String token = data['accessToken'];
 
 								var deviceResponse = await http.get(
-									Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/get-all'),
+									Uri.https('6216-171-234-235-142.ngrok-free.app', 'api/device/get-all', {'ownerEmail': email}),
 									headers: {
 										HttpHeaders.authorizationHeader: "Bearer $token",
 										"ngrok-skip-browser-warning": "69420"

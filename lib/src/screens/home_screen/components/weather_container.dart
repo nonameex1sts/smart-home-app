@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherContainer extends StatefulWidget {
+  final String ownerEmail;
   final String token;
-  const WeatherContainer({Key? key, required this.token}) : super(key: key);
+  const WeatherContainer({Key? key, required this.token, required this.ownerEmail}) : super(key: key);
 
   @override
   State<WeatherContainer> createState() => _WeatherContainerState();
@@ -22,7 +23,7 @@ class _WeatherContainerState extends State<WeatherContainer> {
 
   Future<void> initWeatherData() async {
     var response = await http.get(
-      Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/statistics'),
+      Uri.https('6216-171-234-235-142.ngrok-free.app', 'api/statistics', {'ownerEmail': widget.ownerEmail}),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
         "ngrok-skip-browser-warning": "69420"
@@ -47,7 +48,7 @@ class _WeatherContainerState extends State<WeatherContainer> {
 
     timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
       var response = await http.get(
-        Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/statistics'),
+        Uri.https('6216-171-234-235-142.ngrok-free.app', 'api/statistics', {'ownerEmail': widget.ownerEmail}),
         headers: {
           HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
           "ngrok-skip-browser-warning": "69420"

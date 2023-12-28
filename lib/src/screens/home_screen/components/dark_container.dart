@@ -137,7 +137,7 @@ class _DarkContainerState extends State<DarkContainer> {
                 InkWell(
                   onTap: () async {
                     var response = await http.put(
-                      Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/status'),
+                      Uri.https('6216-171-234-235-142.ngrok-free.app', 'api/device/status'),
                       headers: {
                         HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
                         'Content-Type': 'application/json; charset=UTF-8',

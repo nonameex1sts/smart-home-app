@@ -92,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              body: Body(devices: devices, token: token),
+              body: Body(devices: devices, token: token, ownerEmail: email,),
             ),
           );
   }

@@ -10,9 +10,10 @@ import 'add_device_widget.dart';
 import 'dark_container.dart';
 
 class Body extends StatefulWidget {
+  final String ownerEmail;
   final String token;
   dynamic devices;
-  Body({Key? key, required this.devices, required this.token}) : super(key: key);
+  Body({Key? key, required this.devices, required this.token, required this.ownerEmail}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -21,7 +22,7 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   Future<void> updateDevices() async {
     var response = await http.get(
-      Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/get-all'),
+      Uri.https('6216-171-234-235-142.ngrok-free.app', 'api/device/get-all', {'ownerEmail': widget.ownerEmail}),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
         "ngrok-skip-browser-warning": "69420"
@@ -51,7 +52,7 @@ class _BodyState extends State<Body> {
           children: [
             Padding(
               padding: EdgeInsets.all(getProportionateScreenHeight(5)),
-              child: WeatherContainer(token: widget.token,),
+              child: WeatherContainer(token: widget.token, ownerEmail: widget.ownerEmail,),
             ),
             for (int i = 0; i < widget.devices.length; i+=2)
               Row(
@@ -89,7 +90,7 @@ class _BodyState extends State<Body> {
               ),
             Padding(
               padding: EdgeInsets.all(getProportionateScreenHeight(8)),
-              child:  AddNewDevice(updateDevices: updateDevices, token: widget.token,),
+              child:  AddNewDevice(updateDevices: updateDevices, token: widget.token, ownerEmail: widget.ownerEmail,),
             ),
           ],
         ),

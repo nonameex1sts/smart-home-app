@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Body extends StatefulWidget {
+  final String ownerEmail;
   final String token;
-  const Body({Key? key, required this.token}) : super(key: key);
+  const Body({Key? key, required this.token, required this.ownerEmail}) : super(key: key);
 
   @override
   State<Body> createState() => _BodyState();
@@ -166,7 +167,7 @@ class _BodyState extends State<Body> {
               onTap: () async {
                 if(_formKey.currentState!.validate()){
                   var response = await http.post(
-                    Uri.https('e7b6-2401-d800-916a-c724-3afb-dd0e-ebe1-b135.ngrok-free.app', 'api/device/add'),
+                    Uri.https('6216-171-234-235-142.ngrok-free.app', 'api/device/add'),
                     headers: {
                       HttpHeaders.authorizationHeader: "Bearer ${widget.token}",
                       'Content-Type': 'application/json; charset=UTF-8',
@@ -176,6 +177,7 @@ class _BodyState extends State<Body> {
                       'type': typeController.text,
                       'isOn': false,
                       'description': descriptionController.text,
+                      'ownerEmail': widget.ownerEmail,
                     }),
                   );
 
