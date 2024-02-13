@@ -19,3 +19,7 @@
   flutter pub run flutter_native_splash:create
 ```
 5. Run App
+
+# Video demo:
+
+https://www.youtube.com/watch?v=C7VvXcoe6Mc
